@@ -14,22 +14,6 @@ notation, in this case 1630 which is the time 3 hours and 45 minutes after 12.45
 Typical output might be Start time is 1415. Duration is 50. End time is 1505.
 */
 #include<stdio.h>
-
-int getMin(int time){
-    // this function retuns minutes of a time
-    int temp=0;
-    if(time>9){
-        temp+=time%100;
-    }else{
-        temp+=time%10;
-    } 
-    return temp; 
-}
-
-int getHr(int time){
-    // this function retuns hrs of a time
-    return time/100;  
-}
 int main(void){
     // defining time and duration
     int time,duration,hrs,min;
@@ -39,15 +23,15 @@ int main(void){
     printf("Enter Duration : ");
     scanf("%d",&duration);
     // adding duration to time
-    hrs=getHr(time);
-    hrs+=getHr(duration);
-    min=getMin(time);
-    min+=getMin(duration);
-    while(min>=60){
+    hrs=time/100;
+    hrs+=duration/100;
+    min=time%100;
+    min+=duration%100;
+    if(min>=60){
         min-=60;
         hrs++;
     }
-    while(hrs>=24){
+    if(hrs>=24){
         hrs-=24;
     }
     printf("Start time : %d. Duration is %d. End time is %d.\n",time,duration,(hrs*100)+(min));
